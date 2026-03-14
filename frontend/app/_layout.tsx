@@ -1,8 +1,5 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import {
-  DMSerifDisplay_400Regular,
-  useFonts as useSerifFonts,
-} from '@expo-google-fonts/dm-serif-display';
+import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display';
 import {
   Inter_400Regular,
   Inter_500Medium,
@@ -23,7 +20,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     DMSerifDisplay_400Regular,
     Inter_400Regular,
     Inter_500Medium,
@@ -32,12 +29,12 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (fontsLoaded) {
+    if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded, fontError]);
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded && !fontError) {
     return null;
   }
 
@@ -59,3 +56,5 @@ export default function RootLayout() {
     </GestureHandlerRootView>
   );
 }
+
+notepad src\context\DataContext.tsx
