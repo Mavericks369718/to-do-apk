@@ -56,12 +56,17 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // Initialize app on mount
   useEffect(() => {
     const init = async () => {
-      await Storage.initializeApp();
-      await NotificationService.requestNotificationPermissions();
-      await NotificationService.setupNotificationCategories();
-      await refreshAll();
-      setIsLoading(false);
-    };
+  try {
+    await Storage.initializeApp();
+    await NotificationService.requestNotificationPermissions();
+    await NotificationService.setupNotificationCategories();
+    await refreshAll();
+  } catch (error) {
+    console.error('Init error:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
     init();
 
     // Set up notification listeners
