@@ -1,7 +1,8 @@
 // TaskFlow Storage Service
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Task, Note, MoodEntry, UserProfile, StreakData, STORAGE_KEYS } from '../constants/types';
-import { v4 as uuidv4 } from 'uuid';
+import * as Crypto from 'expo-crypto';
+const uuidv4 = () => Crypto.randomUUID();
 
 // Helper function to get today's date as ISO string
 const getTodayISO = () => new Date().toISOString().split('T')[0];
