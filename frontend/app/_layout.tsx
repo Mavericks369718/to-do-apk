@@ -56,5 +56,3 @@ export default function RootLayout() {
     </GestureHandlerRootView>
   );
 }
-
-notepad src\context\DataContext.tsx
